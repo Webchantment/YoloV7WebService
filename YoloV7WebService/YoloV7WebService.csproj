@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Platforms>AnyCPU</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Microsoft.ML.OnnxRuntime.Gpu" Version="1.14.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\Yolov7net\IVilson.AI.Yolov7net.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Assets\yolov7-tiny.onnx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
