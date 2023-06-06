@@ -2,6 +2,15 @@ using System.Diagnostics;
 using System.Drawing;
 using Yolov7net;
 
+var useCuda = false;
+if (Environment.GetCommandLineArgs().Length > 1 && Environment.GetCommandLineArgs()[1] == "-gpu")
+{
+    useCuda = true;
+    Console.WriteLine("Running in GPU Mode");
+}
+else
+    Console.WriteLine("Running in CPU Mode");
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -10,7 +19,7 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-var yolov7 = new Yolov7("./Assets/yolov7-tiny.onnx");
+var yolov7 = new Yolov7("./Assets/yolov7-tiny.onnx", useCuda);
 yolov7.SetupYoloDefaultLabels();
 
 app.MapGet("/predictions/{imagePath}", (string imagePath) =>
